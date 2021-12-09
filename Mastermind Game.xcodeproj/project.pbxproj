@@ -19,6 +19,8 @@
 		8531B59D275B396D003408B6 /* Mastermind_GameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B59C275B396D003408B6 /* Mastermind_GameUITestsLaunchTests.swift */; };
 		8531B5AA275B51B8003408B6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B5A9275B51B8003408B6 /* HomeViewController.swift */; };
 		8531B5AC275B6580003408B6 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B5AB275B6580003408B6 /* GameViewController.swift */; };
+		85DB6089275FE5FC0059790A /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB6088275FE5FC0059790A /* GameTableViewCell.swift */; };
+		85DB608B275FE70F0059790A /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DB608A275FE70F0059790A /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		8531B59C275B396D003408B6 /* Mastermind_GameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mastermind_GameUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8531B5A9275B51B8003408B6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8531B5AB275B6580003408B6 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		85DB6088275FE5FC0059790A /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		85DB608A275FE70F0059790A /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 		8531B575275B3969003408B6 /* Mastermind Game */ = {
 			isa = PBXGroup;
 			children = (
+				8540EF5F2760832400DE50B5 /* Model */,
+				85DB6088275FE5FC0059790A /* GameTableViewCell.swift */,
 				8531B5AB275B6580003408B6 /* GameViewController.swift */,
 				8531B5A9275B51B8003408B6 /* HomeViewController.swift */,
 				8531B576275B3969003408B6 /* AppDelegate.swift */,
@@ -134,6 +140,14 @@
 				8531B59C275B396D003408B6 /* Mastermind_GameUITestsLaunchTests.swift */,
 			);
 			path = "Mastermind GameUITests";
+			sourceTree = "<group>";
+		};
+		8540EF5F2760832400DE50B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				85DB608A275FE70F0059790A /* Game.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,11 +282,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8531B5AA275B51B8003408B6 /* HomeViewController.swift in Sources */,
+				85DB608B275FE70F0059790A /* Game.swift in Sources */,
 				8531B57B275B3969003408B6 /* ViewController.swift in Sources */,
 				8531B581275B3969003408B6 /* Mastermind_Game.xcdatamodeld in Sources */,
 				8531B577275B3969003408B6 /* AppDelegate.swift in Sources */,
 				8531B5AC275B6580003408B6 /* GameViewController.swift in Sources */,
 				8531B579275B3969003408B6 /* SceneDelegate.swift in Sources */,
+				85DB6089275FE5FC0059790A /* GameTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,57 +7,108 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    @IBOutlet weak var num1Label: UILabel!
-    @IBOutlet weak var x1y1Box: UIButton!
-    @IBOutlet weak var x1y2Box: UIButton!
-    @IBOutlet weak var x1y3Box: UIButton!
-    @IBOutlet weak var x1y4Box: UIButton!
+    var game = Game()
     
-    @IBOutlet weak var result1Box: UIButton!
-    @IBOutlet weak var result2Box: UIButton!
-    @IBOutlet weak var result3Box: UIButton!
-    @IBOutlet weak var result4Box: UIButton!
-    
-    @IBOutlet weak var check1Btn: UIButton!
+    // MARK: - Outlets
+    @IBOutlet var codeButtons: [UIButton]!
+    @IBOutlet var colorButtons: [UIButton]!
+    @IBOutlet var checkButton: UIButton!
+    @IBOutlet weak var colorView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
         
-//        x1y1Box.layer.cornerRadius = x1y1Box.frame.width / 2
-//        x1y1Box.layer.masksToBounds = true
-//
-//        x1y2Box.layer.cornerRadius = x1y2Box.frame.width / 2
-//        x1y2Box.layer.masksToBounds = true
-//
-//        x1y3Box.layer.cornerRadius = x1y3Box.frame.width / 2
-//        x1y3Box.layer.masksToBounds = true
-//
-//        x1y4Box.layer.cornerRadius = x1y4Box.frame.width / 2
-//        x1y4Box.layer.masksToBounds = true
-//
-//        result1Box.layer.cornerRadius = result1Box.frame.width / 2
-//        result1Box.layer.masksToBounds = true
-//        result2Box.layer.cornerRadius = result2Box.frame.width / 2
-//        result2Box.layer.masksToBounds = true
-//        result3Box.layer.cornerRadius = result3Box.frame.width / 2
-//        result3Box.layer.masksToBounds = true
-//        result4Box.layer.cornerRadius = result4Box.frame.width / 2
-//        result4Box.layer.masksToBounds = true
-//
-        // Do any additional setup after loading the view.
+        // MARK: - Set code
+        var code = game.setCode()
+        codeButtons[0].setImage(UIImage(named: code[0]), for: .normal)
+        codeButtons[1].setImage(UIImage(named: code[1]), for: .normal)
+        codeButtons[2].setImage(UIImage(named: code[2]), for: .normal)
+        codeButtons[3].setImage(UIImage(named: code[3]), for: .normal)
+        // MARK: - Set color
+        var color = game.getColor()
+        print(color)
+        colorButtons[0].setImage(UIImage(named: color[0]), for: .normal)
+        colorButtons[1].setImage(UIImage(named: color[1]), for: .normal)
+        colorButtons[2].setImage(UIImage(named: color[2]), for: .normal)
+        colorButtons[3].setImage(UIImage(named: color[3]), for: .normal)
+        colorButtons[4].setImage(UIImage(named: color[4]), for: .normal)
+        colorButtons[5].setImage(UIImage(named: color[5]), for: .normal)
+        
+        
+    
+        let tapRedGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapRedGestureRecognizer.numberOfTapsRequired = 1
+        let tapBlueGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapBlueGestureRecognizer.numberOfTapsRequired = 1
+        let tapYellowGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapYellowGestureRecognizer.numberOfTapsRequired = 1
+        let tapGreenGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapGreenGestureRecognizer.numberOfTapsRequired = 1
+        let tapPurpleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapPurpleGestureRecognizer.numberOfTapsRequired = 1
+        let tapBrownGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
+        tapBrownGestureRecognizer.numberOfTapsRequired = 1
+        
+//        colorButtons[0].isEnabled = false
+//        colorButtons[0].isUserInteractionEnabled = true
+        colorButtons[0].addGestureRecognizer(tapRedGestureRecognizer)
+        colorButtons[1].addGestureRecognizer(tapBlueGestureRecognizer)
+        colorButtons[2].addGestureRecognizer(tapYellowGestureRecognizer)
+        colorButtons[3].addGestureRecognizer(tapGreenGestureRecognizer)
+        colorButtons[4].addGestureRecognizer(tapPurpleGestureRecognizer)
+        colorButtons[5].addGestureRecognizer(tapBrownGestureRecognizer)
     }
     
-
-    /*
-    // MARK: - Navigation
+    @objc func tapOnImage(gestureRecognizer: UITapGestureRecognizer) {
+        print(gestureRecognizer.view?.tag ?? "0")
+        print("tap")
+        let tapLocation = gestureRecognizer.location(in: colorView)
+        print(tapLocation.x)
+        print(tapLocation.y)
+//        if let selectedIndexPath = roundsTableView.indexPathForRow(at: tapLocation) {
+//            print(selectedIndexPath.row)
+//            self.game.rounds[selectedIndexPath.row].selectedIndex = gestureRecognizer.view!.tag
+//            roundsTableView.reloadRows(at: [selectedIndexPath], with: .none)
+//        }
+    }
+    
+    // MARK: - Table
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as? GameTableViewCell else {
+            fatalError("Can't instantiate GameTableViewCell")
+        }
+        
+      
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print(indexPath.row)
+    }
+//    func onDrag(_ data: @escaping () -> NSItemProvider) -> some View
+    
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
+        }
 }
+    
+
+
