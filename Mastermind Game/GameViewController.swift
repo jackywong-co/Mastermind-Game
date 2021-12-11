@@ -9,7 +9,7 @@ import UIKit
 
 class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    var game = Game()
+    var game : Game = Game()
     
     // MARK: - Outlets
     @IBOutlet var codeButtons: [UIButton]!
@@ -19,60 +19,38 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        
-        // MARK: - Set code
-        var code = game.setCode()
-        codeButtons[0].setImage(UIImage(named: code[0]), for: .normal)
-        codeButtons[1].setImage(UIImage(named: code[1]), for: .normal)
-        codeButtons[2].setImage(UIImage(named: code[2]), for: .normal)
-        codeButtons[3].setImage(UIImage(named: code[3]), for: .normal)
-        // MARK: - Set color
-        var color = game.getColor()
-        print(color)
-        colorButtons[0].setImage(UIImage(named: color[0]), for: .normal)
-        colorButtons[1].setImage(UIImage(named: color[1]), for: .normal)
-        colorButtons[2].setImage(UIImage(named: color[2]), for: .normal)
-        colorButtons[3].setImage(UIImage(named: color[3]), for: .normal)
-        colorButtons[4].setImage(UIImage(named: color[4]), for: .normal)
-        colorButtons[5].setImage(UIImage(named: color[5]), for: .normal)
-        
-        
-    
-        let tapRedGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapRedGestureRecognizer.numberOfTapsRequired = 1
-        let tapBlueGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapBlueGestureRecognizer.numberOfTapsRequired = 1
-        let tapYellowGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapYellowGestureRecognizer.numberOfTapsRequired = 1
-        let tapGreenGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapGreenGestureRecognizer.numberOfTapsRequired = 1
-        let tapPurpleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapPurpleGestureRecognizer.numberOfTapsRequired = 1
-        let tapBrownGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnImage))
-        tapBrownGestureRecognizer.numberOfTapsRequired = 1
-        
-//        colorButtons[0].isEnabled = false
-//        colorButtons[0].isUserInteractionEnabled = true
-        colorButtons[0].addGestureRecognizer(tapRedGestureRecognizer)
-        colorButtons[1].addGestureRecognizer(tapBlueGestureRecognizer)
-        colorButtons[2].addGestureRecognizer(tapYellowGestureRecognizer)
-        colorButtons[3].addGestureRecognizer(tapGreenGestureRecognizer)
-        colorButtons[4].addGestureRecognizer(tapPurpleGestureRecognizer)
-        colorButtons[5].addGestureRecognizer(tapBrownGestureRecognizer)
+        self.setGame()
     }
     
-    @objc func tapOnImage(gestureRecognizer: UITapGestureRecognizer) {
-        print(gestureRecognizer.view?.tag ?? "0")
-        print("tap")
-        let tapLocation = gestureRecognizer.location(in: colorView)
-        print(tapLocation.x)
-        print(tapLocation.y)
-//        if let selectedIndexPath = roundsTableView.indexPathForRow(at: tapLocation) {
-//            print(selectedIndexPath.row)
-//            self.game.rounds[selectedIndexPath.row].selectedIndex = gestureRecognizer.view!.tag
-//            roundsTableView.reloadRows(at: [selectedIndexPath], with: .none)
-//        }
+    func setGame(){
+        self.game = Game()
+        for codeButtons in codeButtons {
+            let index = codeButtons.tag
+            let code = game.code[index]
+            codeButtons.setImage(UIImage(named: "play.png"), forState: .normal)
+
+//            codeButtons.backgroundColor = self.getColor(code: code)
+//            codeButtons.layer.cornerRadius = 20
+        }
+    }
+    
+    func getColor(code : Int) -> String {
+        switch(code){
+        case 0:
+            return "Brown"
+        case 1:
+            return .black
+        case 2:
+            return .blue
+        case 3:
+            return .yellow
+        case 4:
+            return .red
+        case 5:
+            return .green
+        default:
+            return .lightGray
+        }
     }
     
     // MARK: - Table
@@ -107,7 +85,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
  
-        }
+    }
 }
     
 
