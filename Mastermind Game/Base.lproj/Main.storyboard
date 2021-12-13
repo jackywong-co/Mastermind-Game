@@ -249,11 +249,11 @@
                                 <rect key="frame" x="20" y="111.5" width="374" height="599"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="JNJ-Yb-85i">
-                                        <rect key="frame" x="0.0" y="44.5" width="374" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="118" id="JNJ-Yb-85i" customClass="GameTableViewCell" customModule="Mastermind_Game" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="118"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JNJ-Yb-85i" id="Y0F-OT-CqT">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="118"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" id="Tqg-3K-yPJ">
@@ -305,7 +305,7 @@
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                             <state key="normal" title="LT" image="Black"/>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsU-Bf-PTC">
+                                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsU-Bf-PTC">
                                                                             <rect key="frame" x="0.0" y="24.5" width="28" height="24"/>
                                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -316,13 +316,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="t4q-MS-bZ3">
                                                                     <rect key="frame" x="30" y="0.0" width="27.5" height="48.5"/>
                                                                     <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyu-ag-hHr">
+                                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyu-ag-hHr">
                                                                             <rect key="frame" x="0.0" y="0.0" width="27.5" height="24.5"/>
                                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                             <state key="normal" title="RT" image="Black"/>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhv-xL-fmh">
+                                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhv-xL-fmh">
                                                                             <rect key="frame" x="0.0" y="24.5" width="27.5" height="24"/>
                                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -339,8 +339,23 @@
                                                 </stackView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="roundLabel" destination="PJ6-BS-FwR" id="Zgk-Xj-2tT"/>
+                                            <outletCollection property="colorButtons" destination="BeP-t5-0UU" collectionClass="NSMutableArray" id="T9S-kN-iA2"/>
+                                            <outletCollection property="colorButtons" destination="kfy-s4-8F0" collectionClass="NSMutableArray" id="wnH-zO-3wl"/>
+                                            <outletCollection property="colorButtons" destination="rKF-ir-KAc" collectionClass="NSMutableArray" id="oJb-y9-36y"/>
+                                            <outletCollection property="colorButtons" destination="d8c-nB-vm0" collectionClass="NSMutableArray" id="O6q-xN-yPL"/>
+                                            <outletCollection property="pinButtons" destination="LfT-be-sDb" collectionClass="NSMutableArray" id="h5B-v8-7kM"/>
+                                            <outletCollection property="pinButtons" destination="Vyu-ag-hHr" collectionClass="NSMutableArray" id="A1W-cb-Obt"/>
+                                            <outletCollection property="pinButtons" destination="SsU-Bf-PTC" collectionClass="NSMutableArray" id="jlN-wz-SK6"/>
+                                            <outletCollection property="pinButtons" destination="hhv-xL-fmh" collectionClass="NSMutableArray" id="vmx-rx-AiP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qHc-QC-8m2" id="8Ff-X3-0e1"/>
+                                    <outlet property="delegate" destination="qHc-QC-8m2" id="Br5-aI-uN3"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YGl-TF-2Zz"/>
@@ -377,6 +392,7 @@
                     <connections>
                         <outlet property="checkButton" destination="In6-VP-mW4" id="3YE-Zv-0mz"/>
                         <outlet property="colorView" destination="GHk-cU-oRM" id="Nbp-de-8Jt"/>
+                        <outlet property="tableView" destination="OEJ-uk-Ouv" id="WmM-gE-9ai"/>
                         <outletCollection property="codeButtons" destination="9Or-8b-WSx" collectionClass="NSMutableArray" id="yKq-KX-kF5"/>
                         <outletCollection property="codeButtons" destination="MGU-kb-NBm" collectionClass="NSMutableArray" id="8CZ-sj-HT5"/>
                         <outletCollection property="codeButtons" destination="nEG-S7-5Aj" collectionClass="NSMutableArray" id="BBH-Ol-zH7"/>
