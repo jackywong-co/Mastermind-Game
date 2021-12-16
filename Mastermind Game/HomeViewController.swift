@@ -9,6 +9,11 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBAction func leave(segue: UIStoryboardSegue) {
+        
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

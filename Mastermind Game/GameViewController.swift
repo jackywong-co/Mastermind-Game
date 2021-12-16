@@ -11,8 +11,8 @@ import UIKit
 class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var game : Game = Game()
-
-
+    
+    
     
     // MARK: - Outlets
     @IBOutlet var codeButtons: [UIButton]!
@@ -21,6 +21,8 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var checkButton: UIButton!
     @IBOutlet weak var colorView: UIStackView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +31,18 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         self.tableView.rowHeight = 55
         
-
-
+        messageLabel.text = "Game Start"
+        print("Game Start")
         
-        print(game.record)
+        
+
         let tapGestureRecognizer0 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer4 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer5 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
-       
+        
         colorButtons[0].addGestureRecognizer(tapGestureRecognizer0)
         colorButtons[1].addGestureRecognizer(tapGestureRecognizer1)
         colorButtons[2].addGestureRecognizer(tapGestureRecognizer2)
@@ -68,23 +71,19 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Get start the game
     func setGame(){
-        self.game = Game()
-        // set code
-        for codeButton in codeButtons {
-            let index = codeButton.tag
-            let code = game.code[index]
-            codeButton.setImage(getColor(code: code), for: .normal)
-        }
+        self.game = Game()        
         // set color button background color
         for colorButton in colorButtons {
             let index = colorButton.tag
             colorButton.setImage(getColor(code: index), for: .normal)
         }
+        game.code = game.generateRandomNumber(0, 5, 4)
+        print("code \(game.code)")
     }
     
     @objc func handleTapOnImageView(gestureRecognizer: UITapGestureRecognizer) {
         print("tag : \(gestureRecognizer.view?.tag ?? 0)")
-       
+        
         if game.inputPegs[0] == 8 {
             game.inputPegs[0] = gestureRecognizer.view?.tag ?? 8
             inputButtons[0].setImage(getColor(code: Int(gestureRecognizer.view?.tag ?? 8)), for: .normal)
@@ -98,9 +97,9 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             game.inputPegs[3] = gestureRecognizer.view?.tag ?? 8
             inputButtons[3].setImage(getColor(code: Int(gestureRecognizer.view?.tag ?? 8)), for: .normal)
         }
-
-              
-
+        
+        
+        
     }
     
     // MARK: - Table
@@ -125,8 +124,11 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.pinButtons[1].setImage(getColor(code: game.record[indexPath.row][2][1]), for: .normal)
         cell.pinButtons[2].setImage(getColor(code: game.record[indexPath.row][2][2]), for: .normal)
         cell.pinButtons[3].setImage(getColor(code: game.record[indexPath.row][2][3]), for: .normal)
-
+        
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+        // auto scroll to top
+        tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: 0), at: .top, animated: true)
+        
         return cell
     }
     
@@ -134,32 +136,72 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         print(game.code)
         
         // append record
-        game.record.append([game.addRound(round: 1), game.addImputs(input1: game.inputPegs[0], input2: game.inputPegs[1], input3: game.inputPegs[2], input4: game.inputPegs[3]),game.addPins()])
+        game.record.append([game.addRound(), game.addImputs(input1: game.inputPegs[0], input2: game.inputPegs[1], input3: game.inputPegs[2], input4: game.inputPegs[3]),game.addPins()])
         
+        // set pins
+        game.pins = game.addPins()
         print(game.record)
         
         // reset all input button
         for inputButton in inputButtons {
-            
             inputButton.setImage(getColor(code: 8), for: .normal)
         }
-        // reset input pegs
-        game.inputPegs = [8,8,8,8]
+
+        if game.pins == [6,6,6,6] {
+            messageLabel.text = "You Win !!!"
+            print("end game")
+            displayCode()
+            displayAlert()
+        } else {
+            game.inputPegs = [8,8,8,8]
+        }
         
         print(game.round)
         
         tableView.reloadData()
         
-//        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-
+        
+        
     }
-
+    
+    func displayAlert() {
+        // Declare Alert message
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this?", preferredStyle: .alert)
+        
+        // Create OK button with action handler
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            print("Ok button tapped")
+            
+        })
+        
+        // Create Cancel button with action handlder
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button tapped")
+        }
+        
+        //Add OK and Cancel button to dialog message
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+    }
+    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
     
+    
+    func displayCode(){
+        for codeButton in codeButtons {
+            let index = codeButton.tag
+            let code = game.code[index]
+            codeButton.setImage(getColor(code: code), for: .normal)
+        }
+    }
     func getColor(code : Int) -> UIImage {
         switch(code){
         case 0:
