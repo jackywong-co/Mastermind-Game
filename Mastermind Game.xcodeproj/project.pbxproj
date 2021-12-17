@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8531B577275B3969003408B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B576275B3969003408B6 /* AppDelegate.swift */; };
 		8531B579275B3969003408B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B578275B3969003408B6 /* SceneDelegate.swift */; };
-		8531B57B275B3969003408B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531B57A275B3969003408B6 /* ViewController.swift */; };
 		8531B57E275B3969003408B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8531B57C275B3969003408B6 /* Main.storyboard */; };
 		8531B581275B3969003408B6 /* Mastermind_Game.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8531B57F275B3969003408B6 /* Mastermind_Game.xcdatamodeld */; };
 		8531B583275B396C003408B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8531B582275B396C003408B6 /* Assets.xcassets */; };
@@ -44,7 +43,6 @@
 		8531B573275B3969003408B6 /* Mastermind Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mastermind Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8531B576275B3969003408B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8531B578275B3969003408B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8531B57A275B3969003408B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8531B57D275B3969003408B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8531B580275B3969003408B6 /* Mastermind_Game.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mastermind_Game.xcdatamodel; sourceTree = "<group>"; };
 		8531B582275B396C003408B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,13 +107,10 @@
 		8531B575275B3969003408B6 /* Mastermind Game */ = {
 			isa = PBXGroup;
 			children = (
+				85C65706276C5EA300AC0CC5 /* Controller */,
 				8540EF5F2760832400DE50B5 /* Model */,
-				85DB6088275FE5FC0059790A /* GameTableViewCell.swift */,
-				8531B5AB275B6580003408B6 /* GameViewController.swift */,
-				8531B5A9275B51B8003408B6 /* HomeViewController.swift */,
 				8531B576275B3969003408B6 /* AppDelegate.swift */,
 				8531B578275B3969003408B6 /* SceneDelegate.swift */,
-				8531B57A275B3969003408B6 /* ViewController.swift */,
 				8531B57C275B3969003408B6 /* Main.storyboard */,
 				8531B582275B396C003408B6 /* Assets.xcassets */,
 				8531B584275B396C003408B6 /* LaunchScreen.storyboard */,
@@ -148,6 +143,16 @@
 				85DB608A275FE70F0059790A /* Game.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		85C65706276C5EA300AC0CC5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8531B5A9275B51B8003408B6 /* HomeViewController.swift */,
+				8531B5AB275B6580003408B6 /* GameViewController.swift */,
+				85DB6088275FE5FC0059790A /* GameTableViewCell.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,7 +288,6 @@
 			files = (
 				8531B5AA275B51B8003408B6 /* HomeViewController.swift in Sources */,
 				85DB608B275FE70F0059790A /* Game.swift in Sources */,
-				8531B57B275B3969003408B6 /* ViewController.swift in Sources */,
 				8531B581275B3969003408B6 /* Mastermind_Game.xcdatamodeld in Sources */,
 				8531B577275B3969003408B6 /* AppDelegate.swift in Sources */,
 				8531B5AC275B6580003408B6 /* GameViewController.swift in Sources */,

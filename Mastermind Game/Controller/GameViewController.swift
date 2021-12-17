@@ -11,9 +11,7 @@ import UIKit
 class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var game : Game = Game()
-    
-    
-    
+     
     // MARK: - Outlets
     @IBOutlet var codeButtons: [UIButton]!
     @IBOutlet var colorButtons: [UIButton]!
@@ -35,7 +33,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("Game Start")
         
         
-
+        // set up tap gesture
         let tapGestureRecognizer0 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
         let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTapOnImageView(gestureRecognizer:)))
@@ -51,6 +49,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         colorButtons[5].addGestureRecognizer(tapGestureRecognizer5)
     }
     
+    // onclick input reset
     @IBAction func resetInput1(_ sender: UIButton) {
         sender.setImage(getColor(code: 8), for: .normal)
         game.inputPegs[0] = 8
@@ -77,6 +76,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             let index = colorButton.tag
             colorButton.setImage(getColor(code: index), for: .normal)
         }
+        // set up code
         game.code = game.generateRandomNumber(0, 5, 4)
         print("code \(game.code)")
     }
@@ -133,28 +133,45 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func check(_ sender: Any) {
-        print(game.code)
         
-        // append record
-        game.record.append([game.addRound(), game.addImputs(input1: game.inputPegs[0], input2: game.inputPegs[1], input3: game.inputPegs[2], input4: game.inputPegs[3]),game.addPins()])
+            if (game.inputPegs[0] != 8 && game.inputPegs[1] != 8 &&
+                game.inputPegs[2] != 8 &&
+                game.inputPegs[3] != 8
+            ){
+                print(game.code)
+                
+                // append record
+                game.record.append([game.addRound(), game.addImputs(),game.addPins()])
+              
+                //
+                print(game.addImputs())
+                
+                // set pins
+                game.pins = game.addPins()
+                print(game.record)
+                
+                // reset all input button
+                for inputButton in inputButtons {
+                    inputButton.setImage(getColor(code: 8), for: .normal)
+                }
+                
+                if game.pins == [6,6,6,6] {
+                    messageLabel.text = "You Win !!!"
+                    print("end game")
+                    displayCode()
+                    displayWinGameAlert()
+                } else {
+                    game.inputPegs = [8,8,8,8]
+                }
+            } else {
+                messageLabel.text = "Put All 4 Guesses First!"
+                print("Put All 4 Guesses First!")
+            }
         
-        // set pins
-        game.pins = game.addPins()
-        print(game.record)
         
-        // reset all input button
-        for inputButton in inputButtons {
-            inputButton.setImage(getColor(code: 8), for: .normal)
-        }
+       
 
-        if game.pins == [6,6,6,6] {
-            messageLabel.text = "You Win !!!"
-            print("end game")
-            displayCode()
-            displayAlert()
-        } else {
-            game.inputPegs = [8,8,8,8]
-        }
+        
         
         print(game.round)
         
@@ -164,24 +181,26 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func displayAlert() {
+    func displayWinGameAlert() {
         // Declare Alert message
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Are you sure you want to delete this?", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "You Win !!!", message: "Round : \(game.round) ", preferredStyle: .alert)
         
-        // Create OK button with action handler
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            print("Ok button tapped")
+        // Create Home button with action handler
+        let home = UIAlertAction(title: "Home", style: .default, handler: { (action) -> Void in
+            print("Home")
+            // back home page
+            self.performSegue(withIdentifier: "backHome", sender: self)
             
         })
         
-        // Create Cancel button with action handlder
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
-            print("Cancel button tapped")
+        // Create Review button with action handlder
+        let review = UIAlertAction(title: "Review", style: .cancel) { (action) -> Void in
+            print("Review")
         }
         
-        //Add OK and Cancel button to dialog message
-        dialogMessage.addAction(ok)
-        dialogMessage.addAction(cancel)
+        //Add Home and Review button to dialog message
+        dialogMessage.addAction(home)
+        dialogMessage.addAction(review)
         
         // Present dialog message to user
         self.present(dialogMessage, animated: true, completion: nil)

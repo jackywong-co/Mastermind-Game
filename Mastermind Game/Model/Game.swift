@@ -29,16 +29,9 @@ class Game {
         self.round += 1
         return [round]
     }
-    
-    
  
-    func addImputs(input1: Int,input2: Int,input3: Int,input4: Int) -> [Int]{
-        self.inputPegs = []
-        self.inputPegs.append(input1)
-        self.inputPegs.append(input2)
-        self.inputPegs.append(input3)
-        self.inputPegs.append(input4)
-        return [input1,input2,input3,input4]
+    func addImputs() -> [Int]{
+        return inputPegs
     }
   
     func addPins() -> [Int]{
