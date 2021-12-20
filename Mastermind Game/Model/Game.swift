@@ -12,7 +12,6 @@ class Game {
     var code : [Int]
     var inputPegs : [Int]
     var pins : [Int]
-    
     var record : [[[Int]]]
     var round : Int
     
@@ -78,6 +77,7 @@ class Game {
         return inputPegs
     }
     
+    // generate random number that do not repeat funcation
     func generateRandomNumber(_ from:Int, _ to:Int, _ qut:Int?) -> [Int] {
         var randomNumbers = [Int]() //All our generated numbers
         var numberOfNumbers = qut //How many numbers to generate
@@ -98,24 +98,4 @@ class Game {
         }
         return  randomNumbers
     }
-    
-//    func generateRandomNumber(_ from:Int, _ to:Int, _ qut:Int?) -> [Int] {
-//        var randomNumbers = [Int]()
-//        var numberOfNumbers = qut
-//
-//        let lower = UInt32(from)
-//        let highter = UInt32(to-1)
-//
-//        if numberOfNumbers == nil || numberOfNumbers! > (to-from) + 1{
-//            numberOfNumbers = (to-from) + 1
-//        }
-//        while randomNumbers.count != numberOfNumbers {
-//            let num = arc4random_uniform(highter - lower) + lower
-//            if !randomNumbers.contains(Int(num)){
-//                randomNumbers.append(Int(num))
-//            }
-//        }
-//        return randomNumbers
-//    }
-    
 }

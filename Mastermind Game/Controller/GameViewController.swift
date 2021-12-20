@@ -11,7 +11,9 @@ import UIKit
 class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var game : Game = Game()
-     
+    
+    
+    
     // MARK: - Outlets
     @IBOutlet var codeButtons: [UIButton]!
     @IBOutlet var colorButtons: [UIButton]!
@@ -70,7 +72,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Get start the game
     func setGame(){
-        self.game = Game()        
+        self.game = Game()
         // set color button background color
         for colorButton in colorButtons {
             let index = colorButton.tag
@@ -134,46 +136,53 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func check(_ sender: Any) {
         
-            if (game.inputPegs[0] != 8 && game.inputPegs[1] != 8 &&
-                game.inputPegs[2] != 8 &&
-                game.inputPegs[3] != 8
-            ){
-                print(game.code)
-                
-                // append record
-                game.record.append([game.addRound(), game.addImputs(),game.addPins()])
-              
-                //
-                print(game.addImputs())
-                
-                // set pins
-                game.pins = game.addPins()
-                print(game.record)
-                
-                // reset all input button
-                for inputButton in inputButtons {
-                    inputButton.setImage(getColor(code: 8), for: .normal)
-                }
-                
-                if game.pins == [6,6,6,6] {
-                    messageLabel.text = "You Win !!!"
-                    print("end game")
-                    displayCode()
-                    displayWinGameAlert()
-                } else {
-                    game.inputPegs = [8,8,8,8]
-                }
-            } else {
-                messageLabel.text = "Put All 4 Guesses First!"
-                print("Put All 4 Guesses First!")
+        if (game.inputPegs[0] != 8 && game.inputPegs[1] != 8 &&
+            game.inputPegs[2] != 8 &&
+            game.inputPegs[3] != 8
+        ){
+            print(game.code)
+            
+            // append record
+            game.record.append([game.addRound(), game.addImputs(),game.addPins()])
+            
+            //
+            print(game.addImputs())
+            
+            // set pins
+            game.pins = game.addPins()
+            print(game.record)
+            
+            // reset all input button
+            for inputButton in inputButtons {
+                inputButton.setImage(getColor(code: 8), for: .normal)
             }
+            
+            // lose display
+            if (game.round == 10){
+                messageLabel.text = "You Lose!!!"
+                print("end game")
+                displayLoseGameAlert()
+            }
+            
+            // win display
+            if game.pins == [6,6,6,6] {
+                messageLabel.text = "You Win!!!"
+                print("end game")
+                displayCode()
+                displayWinGameAlert()
+            } else {
+                game.inputPegs = [8,8,8,8]
+            }
+            
+            print(game.round)
+            
+            
+        } else {
+            messageLabel.text = "Put All 4 Guesses First!"
+            print("Put All 4 Guesses First!")
+        }
         
         
-       
-
-        
-        
-        print(game.round)
         
         tableView.reloadData()
         
@@ -183,7 +192,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func displayWinGameAlert() {
         // Declare Alert message
-        let dialogMessage = UIAlertController(title: "You Win !!!", message: "Round : \(game.round) ", preferredStyle: .alert)
+        let dialogMessage = UIAlertController(title: "You Win!!!", message: "Round : \(game.round) ", preferredStyle: .alert)
         
         // Create Home button with action handler
         let home = UIAlertAction(title: "Home", style: .default, handler: { (action) -> Void in
@@ -207,12 +216,36 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func displayLoseGameAlert() {
+        // Declare Alert message
+        let dialogMessage = UIAlertController(title: "You Lose!!!", message: "", preferredStyle: .alert)
+        
+        // Create Home button with action handler
+        let home = UIAlertAction(title: "Home", style: .default, handler: { (action) -> Void in
+            print("Home")
+            // back home page
+            self.performSegue(withIdentifier: "backHome", sender: self)
+            
+        })
+        
+        // Create Review button with action handlder
+        let proceed = UIAlertAction(title: "Continue", style: .cancel) { (action) -> Void in
+            print("Continue")
+        }
+        
+        //Add Home and Review button to dialog message
+        dialogMessage.addAction(home)
+        dialogMessage.addAction(proceed)
+        
+        // Present dialog message to user
+        self.present(dialogMessage, animated: true, completion: nil)
+        
+    }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
-    
     
     func displayCode(){
         for codeButton in codeButtons {
@@ -221,6 +254,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             codeButton.setImage(getColor(code: code), for: .normal)
         }
     }
+    
     func getColor(code : Int) -> UIImage {
         switch(code){
         case 0:
@@ -245,6 +279,11 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             return UIImage(named: "Question Mark")!
         }
     }
+    
+    
+    
+    
+    
 }
 
 

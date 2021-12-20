@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="cf8-nM-JQO">
-                                <rect key="frame" x="20" y="368.5" width="374" height="159"/>
+                                <rect key="frame" x="20" y="427.5" width="374" height="41"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBp-PS-KDb">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
@@ -48,22 +48,6 @@
                                         <connections>
                                             <segue destination="qHc-QC-8m2" kind="show" id="8wl-rZ-Ulv"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vN-bx-7XG">
-                                        <rect key="frame" x="0.0" y="59" width="374" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Multiplayer">
-                                            <color key="titleColor" name="AccentColor"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuE-ys-P9M">
-                                        <rect key="frame" x="0.0" y="118" width="374" height="41"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="History">
-                                            <color key="titleColor" name="AccentColor"/>
-                                        </state>
                                     </button>
                                 </subviews>
                             </stackView>
