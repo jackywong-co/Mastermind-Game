@@ -82,7 +82,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         game.code = game.generateRandomNumber(0, 5, 4)
         print("code \(game.code)")
     }
-    
+    // set up tap gesture
     @objc func handleTapOnImageView(gestureRecognizer: UITapGestureRecognizer) {
         print("tag : \(gestureRecognizer.view?.tag ?? 0)")
         
@@ -189,6 +189,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
     }
+    
     
     func displayWinGameAlert() {
         // Declare Alert message
